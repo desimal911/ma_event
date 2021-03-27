@@ -3,9 +3,9 @@ class Endpoints::Posts < Grape::API
     requires :title, type: String
     requires :body, type: String
   end
-  namespace :posts do
+  namespace :events do
     get do
-      post = Post.create(declared_params)
+      post = Event.create(declared_params)
 
       present post, with: Entities::Post::Base
     end

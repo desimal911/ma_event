@@ -15,8 +15,8 @@ ActiveAdmin.register_page "Dashboard" do
     #   column do
     #     panel "Recent Posts" do
     #       ul do
-    #         Post.recent(5).map do |posts|
-    #           li link_to(posts.title, admin_post_path(posts))
+    #         Event.recent(5).map do |events|
+    #           li link_to(events.title, admin_post_path(events))
     #         end
     #       end
     #     end

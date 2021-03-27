@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_175630) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.text "title"
     t.text "body"
     t.text "author"
@@ -68,5 +68,5 @@ ActiveRecord::Schema.define(version: 2021_03_22_175630) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "posts", "users"
+  add_foreign_key "events", "users"
 end
