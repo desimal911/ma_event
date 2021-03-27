@@ -1,11 +1,11 @@
-ActiveAdmin.register_page "Dashboard" do
-  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
+ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
-  content title: proc { I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+  content title: proc { I18n.t('active_admin.dashboard') } do
+    div class: 'blank_slate_container', id: 'dashboard_default_message' do
+      span class: 'blank_slate' do
+        span I18n.t('active_admin.dashboard_welcome.welcome')
+        small I18n.t('active_admin.dashboard_welcome.call_to_action')
       end
     end
 
@@ -13,10 +13,10 @@ ActiveAdmin.register_page "Dashboard" do
     #
     # columns do
     #   column do
-    #     panel "Recent Posts" do
+    #     panel "Recent Event" do
     #       ul do
-    #         Post.recent(5).map do |posts|
-    #           li link_to(posts.title, admin_post_path(posts))
+    #         Event.recent(5).map do |events|
+    #           li link_to(events.title, admin_post_path(events))
     #         end
     #       end
     #     end
@@ -28,5 +28,5 @@ ActiveAdmin.register_page "Dashboard" do
     #     end
     #   end
     # end
-  end # content
+  end
 end
