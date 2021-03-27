@@ -8,6 +8,8 @@ default: &default
 development:
   <<: *default
   database: ma_event_development
+  username: postgres
+  password: qwerty228911
 
 test:
   <<: *default

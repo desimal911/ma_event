@@ -1,12 +1,12 @@
 class Event::Posts < Grape::API
-  helpers ::Shared
+  helpers Event::Helpers::Shared
   params do
     requires :title, type: String
     requires :body, type: String
   end
   namespace :posts do
     get do
-      declared_params
+      Post.create(declared_params)
     end
   end
 
