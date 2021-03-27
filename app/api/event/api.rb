@@ -1,5 +1,8 @@
 class Event::API < Grape::API
   format :json
   prefix :api
-  mount Event::Posts
+
+  helpers Event::Helpers::Shared
+
+  mount Event::Endpoints::Posts
 end

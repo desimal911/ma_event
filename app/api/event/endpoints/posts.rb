@@ -1,5 +1,4 @@
-class Event::Posts < Grape::API
-  helpers Event::Helpers::Shared
+class Event::Endpoints::Posts < Grape::API
   params do
     requires :title, type: String
     requires :body, type: String
@@ -9,5 +8,4 @@ class Event::Posts < Grape::API
       Post.create(declared_params)
     end
   end
-
 end
