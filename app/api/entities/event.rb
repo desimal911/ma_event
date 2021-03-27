@@ -3,6 +3,6 @@ module Entities::Event
     expose :title
     expose :body
 
-    expose :requests, with:
+    expose :requests, with: Entities::Request::Base
   end
 end
