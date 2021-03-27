@@ -5,4 +5,5 @@ class API < Grape::API
   helpers ::Helpers::Shared
 
   mount Endpoints::Event
+  mount Endpoints::Category
 end
