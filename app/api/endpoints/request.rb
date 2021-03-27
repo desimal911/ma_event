@@ -2,11 +2,11 @@ class Endpoints::Request < Grape::API
   params do
     requires :description, type: String
   end
-  namespace :descriptions do
+  namespace :requests do
     get do
-      description = Description.create(declared_params)
+      request = Request.create(declared_params)
 
-      present description, with: Entities::Description::Base
+      present request, with: Entities::Request::Base
     end
   end
 end

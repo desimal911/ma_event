@@ -6,4 +6,5 @@ class API < Grape::API
 
   mount Endpoints::Event
   mount Endpoints::Category
+  mount Endpoints::Request
 end
