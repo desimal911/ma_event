@@ -13,7 +13,7 @@ ActiveAdmin.register_page "Dashboard" do
     #
     # columns do
     #   column do
-    #     panel "Recent Posts" do
+    #     panel "Recent Event" do
     #       ul do
     #         Event.recent(5).map do |events|
     #           li link_to(events.title, admin_post_path(events))

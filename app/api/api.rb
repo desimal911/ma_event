@@ -4,5 +4,5 @@ class API < Grape::API
 
   helpers ::Helpers::Shared
 
-  mount Endpoints::Posts
+  mount Endpoints::Event
 end
