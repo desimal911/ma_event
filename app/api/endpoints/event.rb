@@ -11,7 +11,7 @@ class Endpoints::Event < Grape::API
   namespace :events do
     post do
       event = Event.create!(declared_params)
-      present event, with: Entities::Event::Base
+      present event, with: Entities::Event::ForAuthor
     end
   end
 end
