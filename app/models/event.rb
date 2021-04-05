@@ -5,5 +5,5 @@ class Event < ApplicationRecord
   has_many :requests
   accepts_nested_attributes_for :requests
 
-  has_one_base64_attached :image
+  has_one_attached :image
 end

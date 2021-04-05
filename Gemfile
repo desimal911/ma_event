@@ -3,9 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-# Plugin for Active Storage to allow base64 upload
-gem 'active_storage_base64'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rack-cors'
 gem 'rails', '~> 6.1.3'
