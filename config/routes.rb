@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options host: ENV.fetch('RAILS_HOST')
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
