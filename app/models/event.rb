@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   belongs_to :category
 
   has_many :requests
-  has_many_attached :images
   accepts_nested_attributes_for :requests
+
+  has_one_base64_attached :image
 end
