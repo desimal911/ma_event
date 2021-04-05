@@ -40,3 +40,5 @@ yarn-debug.log*
 .yarn-integrity
 config/database.yml
 .generators
+yarn.lock
+.env
