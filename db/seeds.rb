@@ -20,8 +20,8 @@ user.update!(password: 'password')
     user: user,
     category: Category.last,
     requests_attributes: [
-      {description: 'test'},
-      {description: 'test2'}
+      { description: 'test' },
+      { description: 'test2' }
     ]
   )
 end
