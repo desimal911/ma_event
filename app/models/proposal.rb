@@ -1,7 +1,7 @@
 class Proposal < ApplicationRecord
+  extend Enumerize
   belongs_to :user
   belongs_to :request
 
-  enum status: [:pending, :accepted, :declined], _default: 'pending'
-  
+  enumerize :status, in: [:pending, :accepted, :declined], default: :pending
 end
