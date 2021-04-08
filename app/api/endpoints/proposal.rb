@@ -14,20 +14,20 @@ class Endpoints::Proposal < Grape::API
         requires :phone_number, type: String
         requires :description, type: String
       end
-
     end
 
     params { use :create_proposal }
     post do
       proposal = Proposal.new
       proposal.update(declared_params)
-      proposal.save
       present proposal, with: Entities::Proposal::Base
     end
 
-
+    params do
+      requires :id
+    end
     get ':proposal_id'  do
-      proposal = Proposal.find(params[:proposal_id])
+      proposal = Proposal.find(params[:id])
       present proposal, with: Entities::Proposal::Base
     end
 
@@ -38,7 +38,5 @@ class Endpoints::Proposal < Grape::API
       proposal = Proposal.find(params[:proposal_id])
       proposal.update(declared_params)
     end
-
-
   end
 end
