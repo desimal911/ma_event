@@ -2,6 +2,7 @@ class Endpoints::Proposal < Grape::API
   namespace :proposals do
     helpers do
       params :update_status do
+        requires :id
         requires :request_id
         requires :user_id
         requires :status
@@ -26,7 +27,7 @@ class Endpoints::Proposal < Grape::API
     params do
       requires :id
     end
-    get ':proposal_id'  do
+    get   do
       proposal = Proposal.find(params[:id])
       present proposal, with: Entities::Proposal::Base
     end
@@ -34,8 +35,8 @@ class Endpoints::Proposal < Grape::API
 
     desc 'Update status proposal.'
     params { use :update_status }
-    put ':proposal_id' do
-      proposal = Proposal.find(params[:proposal_id])
+    put  do
+      proposal = Proposal.find(params[:id])
       proposal.update(declared_params)
     end
   end

@@ -28,5 +28,16 @@ class Endpoints::Event < Grape::API
 
       present event, with: Entities::Event::Base
     end
+
+    desc 'Update status event.'
+    params do
+      requires :id
+      requires :user_id
+      requires :status
+    end
+    put  do
+      event = Event.find(params[:id])
+      event.update(declared_params)
+    end
   end
 end

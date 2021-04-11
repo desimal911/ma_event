@@ -10,6 +10,7 @@ module Entities::Event
     expose :image_url do |entity|
       url_for(entity.image) if entity.image.attached?
     end
+    expose :status
 
     expose :requests, with: Entities::Request::Base
   end
