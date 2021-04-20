@@ -1,51 +1,31 @@
-# Layer 0. Качаем образ Debian OS с установленным ruby версии 2.5 и менеджером для управления gem'ами bundle из DockerHub. Используем его в качестве родительского образа.
 FROM ruby:3.0.0
 
-# Layer 1. Задаем пользователя, от чьего имени будут выполняться последующие команды RUN, ENTRYPOINT, CMD и т.д.
-USER chevent
+RUN apt-get update && apt-get install -qq -y \
+    build-essential git nodejs libpq-dev libgit2-dev manpages-dev pkg-config \
+    --fix-missing --no-install-recommends
+RUN apt-get install -y --no-install-recommends apt-utils
 
-# Layer 2. Обновляем и устанавливаем нужное для Web сервера ПО
-RUN apt-get update -qq && apt-get install -y \
- build-essential libpq-dev libxml2-dev libxslt1-dev nodejs imagemagick apt-transport-https curl nano
+RUN gem install bundler -v 2.2.14 --no-document
 
-# Layer 3. Создаем переменные окружения которые буду дальше использовать в Dockerfile
-ENV APP_USER chevent
-ENV APP_USER_HOME /home/$APP_USER
+# Set an environment variable to store where the app is installed to inside
+# of the Docker image.
+ENV INSTALL_PATH /home/backend
+RUN mkdir -p $INSTALL_PATH
 
-# Layer 4. Поскольку по умолчанию Docker запускаем контейнер от имени root пользователя, то настоятельно рекомендуется создать отдельного пользователя c определенными UID и GID и запустить процесс от имени этого пользователя.
-RUN useradd -m -d $APP_USER_HOME $APP_USER
+# This sets the context of where commands will be run in and is documented
+# on Docker's website extensively.
+RUN mkdir -p $INSTALL_PATH/tmp/pids
+WORKDIR $INSTALL_PATH
 
-# Layer 5. Даем root пользователем пользователю app права owner'а на необходимые директории
-RUN mkdir /var/www && \
- chown -R $APP_USER:$APP_USER /var/www && \
- chown -R $APP_USER $APP_USER_HOME
+# Ensure gems are cached and only get updated when they change. This will
+# drastically increase build times when your gems do not change.
+COPY Gemfile ./
+COPY Gemfile.lock ./
 
-# Layer 6. Создаем и указываем директорию в которую будет помещено приложение. Так же теперь команды RUN, ENTRYPOINT, CMD будут запускаться с этой директории.
-WORKDIR $APP_HOME
+RUN bundle check | bundle install
 
-# Layer 7. Указываем все команды, которые будут выполняться от имени app пользователя
-USER $APP_USER
-
-# Layer 8. Добавляем файлы Gemfile и Gemfile.lock из директории, где лежит Dockerfile (root директория приложения на HostOS) в root директорию WORKDIR
-COPY Gemfile Gemfile.lock ./
-
-# Layer 9. Вызываем команду по установке gem-зависимостей. Рекомендуется запускать эту команду от имени пользователя от которого будет запускаться само приложение
-RUN bundle check || bundle install
-
-# Layer 10. Копируем все содержимое директории приложения в root-директорию WORKDIR
+# Copy in the application code from your work station at the current directory
+# over to the working directory.
 COPY . .
 
-# Layer 11. Указываем все команды, которые будут выполняться от имени root пользователя
-USER $APP_USER
-
-# Layer 12. Даем root пользователем пользователю app права owner'а на WORKDIR
-RUN chown -R $APP_USER:$APP_USER "$APP_HOME/."
-
-# Layer 13. Указываем все команды, которые будут выполняться от имени app пользователя
-USER $APP_USER
-
-# Layer 14. Запускаем команду для компиляции статических (JS и CSS) файлов
-RUN bin/rails assets:precompile
-
-# Layer 15. Указываем команду по умолчанию для запуска будущего контейнера. По скольку в `Layer 13` мы переопределили пользователя, то puma сервер будет запущен от имени www-data пользователя.
-CMD bundle exec puma -C config/puma.rb
+ENTRYPOINT ["bundle", "exec"]
