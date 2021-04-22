@@ -7,5 +7,5 @@ services:
     ports:
       - "80:8080"
     environment:
-      - SWAGGER_JSON=/api/swagger_doc.json
-      - API_URL= http://52.57.253.240:3000/api/swagger_doc.json
+      - API_URL="${RAILS_HOST}${SWAGGER_JSON}"
+    env_file: .env
