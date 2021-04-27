@@ -6,6 +6,7 @@ class API < Grape::API
 
   mount Endpoints::Event
   mount Endpoints::Category
+  mount Endpoints::Proposal
 
   add_swagger_documentation mount_path: '/swagger_doc'
 end
