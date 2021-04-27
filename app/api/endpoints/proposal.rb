@@ -17,6 +17,7 @@ class Endpoints::Proposal < Grape::API
       end
     end
 
+    desc 'Create proposal'
     params { use :create_proposal }
     post do
       proposal = Proposal.new
@@ -24,14 +25,12 @@ class Endpoints::Proposal < Grape::API
       present proposal, with: Entities::Proposal::Base
     end
 
-    params do
-      requires :id
+    route_param :id, type: Integer do
+      get do
+        proposal = Proposal.find(params[:id])
+        present proposal, with: Entities::Proposal::Base
+      end
     end
-    get   do
-      proposal = Proposal.find(params[:id])
-      present proposal, with: Entities::Proposal::Base
-    end
-
 
     desc 'Update status proposal.'
     params { use :update_status }
