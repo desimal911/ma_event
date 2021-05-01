@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6e67a74d-9698-4707-b446-607e8c0ef143",
+		"_postman_id": "621ad6da-1f61-4a93-b467-26952524f7a2",
 		"name": "Api culture",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "Events",
 			"item": [
 				{
-					"name": "Get event_id",
+					"name": "Get by ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -26,12 +26,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/events/23",
-							"protocol": "http",
+							"raw": "{{host}}/api/events/23",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"events",
@@ -42,7 +40,37 @@
 					"response": []
 				},
 				{
-					"name": "Create event",
+					"name": "Get ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -67,36 +95,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/events",
-							"protocol": "http",
+							"raw": "{{host}}/api/events",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"events"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get event by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/events/44",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"events",
-								"44"
 							]
 						}
 					},
@@ -108,7 +113,7 @@
 			"name": "Proposals",
 			"item": [
 				{
-					"name": "Create proposal",
+					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -122,12 +127,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/proposals?request_id=43&user_id=1&price_cents=1000&phone_number=+380932072091&description=посапаю цибулю",
-							"protocol": "http",
+							"raw": "{{host}}/api/proposals?request_id=43&user_id=1&price_cents=1000&phone_number=+380932072091&description=посапаю цибулю",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"proposals"
@@ -159,13 +162,13 @@
 					"response": []
 				},
 				{
-					"name": "Update status proposal",
+					"name": "Update status",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [],
+							"mode": "raw",
+							"raw": "{\n    \"request_id\": 43,\n    \"user_id\": 1,\n    \"status\": \"declined\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -173,37 +176,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/proposals/24?request_id=43&user_id=1&status=declined",
-							"protocol": "http",
+							"raw": "{{host}}/api/proposals/24",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"proposals",
 								"24"
-							],
-							"query": [
-								{
-									"key": "request_id",
-									"value": "43"
-								},
-								{
-									"key": "user_id",
-									"value": "1"
-								},
-								{
-									"key": "status",
-									"value": "declined"
-								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get proposal_id",
+					"name": "Get by ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -220,33 +207,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/proposals/23",
-							"protocol": "http",
+							"raw": "{{host}}/api/proposals/23",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"proposals",
 								"23"
-							],
-							"query": [
-								{
-									"key": "request_id",
-									"value": "43",
-									"disabled": true
-								},
-								{
-									"key": "user_id",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "status",
-									"value": "accepted",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -258,17 +226,15 @@
 			"name": "Categories",
 			"item": [
 				{
-					"name": "get all categories",
+					"name": "Get ALL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/categories",
-							"protocol": "http",
+							"raw": "{{host}}/api/categories",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"categories"
@@ -278,7 +244,7 @@
 					"response": []
 				},
 				{
-					"name": "create new category",
+					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -292,27 +258,105 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/categories?=",
-							"protocol": "http",
+							"raw": "{{host}}/api/categories",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"categories"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
-								}
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"auth_token\", jsonData.auth_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "auth_token",
+			"value": "token"
+		},
+		{
+			"key": "username",
+			"value": "password"
+		},
+		{
+			"key": "password",
+			"value": "password"
 		}
 	]
 }
