@@ -39,6 +39,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_base64 (1.2.0)
+      rails (~> 6.1)
     activeadmin (2.9.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (>= 3.1, < 5.0)
@@ -300,6 +302,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_storage_base64
   activeadmin
   bootsnap (>= 1.4.4)
   byebug

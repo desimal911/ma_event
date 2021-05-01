@@ -6,6 +6,10 @@ class Endpoints::Event < Grape::API
         present event, with: Entities::Event::Base
       end
     end
+    get do
+      events = Event.all
+      present :records, events, with: Entities::Event::Base
+    end
 
     params do
       requires :title, type: String
@@ -17,14 +21,13 @@ class Endpoints::Event < Grape::API
       requires :requests_attributes, type: Array do
         requires :description, type: String
       end
-      optional :image, type: File
+      optional :image, type: Hash do
+        requires :data, type: String
+      end
     end
 
     post do
-      event = Event.new(declared_params.without(:image))
-
-      event.image.attach({ io: params.dig(:image, :tempfile), filename: declared_params[:title]}) if params[:image]
-      event.save!
+      event = Event.create!(declared_params)
 
       present event, with: Entities::Event::Base
     end
