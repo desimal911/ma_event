@@ -1,0 +1,179 @@
+{
+  "info": {
+    "_postman_id": "57aba788-d1a6-46e1-9691-11ba6004eb68",
+    "name": "Api culture",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get event_id",
+      "id": "672cd59b-3111-4ad1-9b10-09eee7fa8a12",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [ ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [ ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:3000/api/events/23"
+      },
+      "response": [ ]
+    },
+    {
+      "name": "Create proposal",
+      "id": "f72d1f7e-2592-43ba-a422-5f03a6228aef",
+      "request": {
+        "method": "POST",
+        "header": [ ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"title\",\n    \"body\": \"body\",\n    \"user_id\": \"1\",\n    \"category_id\": \"4\",\n    \"starts_at\" : \"2021-04-30 20:00:00.000000000 +0000\",\n    \"requests_attributes\": [\n        {\n            \"description\": \"requests1description\"\n        }\n    ]\n\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/proposals?request_id=43&user_id=1&price_cents=1000&phone_number=+380932072091&description=посапаю цибулю",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "proposals"
+          ],
+          "query": [
+            {
+              "key": "request_id",
+              "value": "43"
+            },
+            {
+              "key": "user_id",
+              "value": "1"
+            },
+            {
+              "key": "price_cents",
+              "value": "1000"
+            },
+            {
+              "key": "phone_number",
+              "value": "+380932072091"
+            },
+            {
+              "key": "description",
+              "value": "посапаю цибулю"
+            }
+          ]
+        }
+      },
+      "response": [ ]
+    },
+    {
+      "name": "Update status proposal",
+      "id": "ced4a5dc-ef4d-4091-8579-3b02f6d975f6",
+      "request": {
+        "method": "PUT",
+        "header": [ ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [ ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/proposals/24?request_id=43&user_id=1&status=declined",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "proposals",
+            "24"
+          ],
+          "query": [
+            {
+              "key": "request_id",
+              "value": "43"
+            },
+            {
+              "key": "user_id",
+              "value": "1"
+            },
+            {
+              "key": "status",
+              "value": "declined"
+            }
+          ]
+        }
+      },
+      "response": [ ]
+    },
+    {
+      "name": "Get proposal_id",
+      "id": "3187e977-8bba-4edf-af87-a686f9cffd86",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [ ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [ ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/proposals/23",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "proposals",
+            "23"
+          ],
+          "query": [
+            {
+              "key": "request_id",
+              "value": "43",
+              "disabled": true
+            },
+            {
+              "key": "user_id",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "accepted",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": [ ]
+    }
+  ]
+}
