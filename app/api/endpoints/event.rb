@@ -1,11 +1,14 @@
 class Endpoints::Event < Grape::API
   namespace :events do
+
     route_param :event_id, type: Integer do
+      before { decode_user }
       get do
         event = Event.find(params[:event_id])
         present event, with: Entities::Event::Base
       end
     end
+
     get do
       events = Event.all
       present :records, events, with: Entities::Event::Base
@@ -31,13 +34,14 @@ class Endpoints::Event < Grape::API
 
       present event, with: Entities::Event::Base
     end
-
+    
     desc 'Update status event.'
     params do
       requires :id
       requires :user_id
       requires :status
     end
+
     put  do
       event = Event.find(params[:id])
       event.update(declared_params)
