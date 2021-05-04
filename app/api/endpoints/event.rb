@@ -34,7 +34,7 @@ class Endpoints::Event < Grape::API
 
       present event, with: Entities::Event::Base
     end
-    
+
     desc 'Update status event.'
     params do
       requires :id
