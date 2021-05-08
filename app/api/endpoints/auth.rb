@@ -1,7 +1,7 @@
 class Endpoints::Auth  < Grape::API
   namespace :auth do
 
-    desc 'Log in'
+    desc 'Log in', { headers: 'Authorization' }
     params do
       requires :email, type: String
       requires :password, type: String
@@ -9,17 +9,13 @@ class Endpoints::Auth  < Grape::API
     post do
       user = User.authenticate(params[:email], params[:password])
       payload = { user_id: user.id }
-      token = JWT.encode payload, nil, 'none'
-      { token: token }
-    end
+      token = JWT.encode payload, nil, 'HS256'
+      present(token: token)
+      user = User.find(authenticate['user_id'])
+      present user
 
-    desc 'Chek user'
-    params do
-      requires :token
-    end
-    get do
-      user = User.find(decode_user['user_id'])
-      user
+      # user = User.find(authenticate['user_id'])
+      # present(user: user)
     end
   end
 end

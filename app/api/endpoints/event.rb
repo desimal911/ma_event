@@ -2,7 +2,7 @@ class Endpoints::Event < Grape::API
   namespace :events do
 
     route_param :event_id, type: Integer do
-      before { decode_user }
+      before { authenticate }
       get do
         event = Event.find(params[:event_id])
         present event, with: Entities::Event::Base
