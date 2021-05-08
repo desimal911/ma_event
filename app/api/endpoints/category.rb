@@ -1,4 +1,6 @@
 class Endpoints::Category < Grape::API
+  before &:authenticate
+
   namespace :categories do
     get do
       categories = Category.all

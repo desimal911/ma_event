@@ -19,6 +19,7 @@ gem 'devise'
 
 # JSON Web Token as main auth method for API
 gem 'jwt'
+gem 'sorcery'
 
 # Use grape engine for API
 gem 'grape'

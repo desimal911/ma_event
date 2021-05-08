@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   extend Enumerize
-  belongs_to :user, required: false
+  belongs_to :user
   belongs_to :category
 
   has_many :requests

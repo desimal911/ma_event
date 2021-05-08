@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0915633b-1dde-4d51-be92-629ab96a37bf",
+		"_postman_id": "9a9d133d-e2b9-4f9a-a955-28942fc8b3b7",
 		"name": "Api culture",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,12 +18,7 @@
 						"header": [],
 						"body": {
 							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"formdata": []
 						},
 						"url": {
 							"raw": "{{host}}/api/events/23",
@@ -49,12 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"formdata": []
 						},
 						"url": {
 							"raw": "{{host}}/api/events",
@@ -91,6 +81,56 @@
 							"path": [
 								"api",
 								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate",
+			"item": [
+				{
+					"name": "Post log in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"console.log(jsonData);",
+									"var auth_key = \"API_CULTURE_AUTH_TOKEN\";",
+									"pm.globals.set(auth_key, jsonData.token);",
+									"",
+									"",
+									"pm.expect(pm.globals.get(auth_key)).to.equal(jsonData.token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth"
 							]
 						}
 					},
@@ -188,12 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"formdata": []
 						},
 						"url": {
 							"raw": "{{host}}/api/proposals/23",
@@ -262,32 +297,25 @@
 			]
 		},
 		{
-			"name": "Authentication",
+			"name": "Users",
 			"item": [
 				{
-					"name": "Get",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"pm.environment.set(\"auth_token\", jsonData.auth_token);",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "Find Me",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,13 +323,46 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/auth",
+							"raw": "{{host}}/api/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"auth"
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Serhii\",\n    \"last_name\": \"Trokhymets\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
 							]
 						}
 					},
@@ -310,6 +371,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{API_CULTURE_AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -336,11 +407,7 @@
 			"value": "http://localhost:3000"
 		},
 		{
-			"key": "auth_token",
-			"value": "token"
-		},
-		{
-			"key": "username",
+			"key": "email",
 			"value": "password"
 		},
 		{

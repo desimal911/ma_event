@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  authenticates_with_sorcery!
+
   has_many :events
   has_many :proposals
 end

@@ -1,5 +1,6 @@
 class Endpoints::Proposal < Grape::API
   namespace :proposals do
+    before &:authenticate
     helpers do
       params :update_status do
         requires :id
@@ -21,8 +22,11 @@ class Endpoints::Proposal < Grape::API
     params { use :create_proposal }
     post do
       proposal = Proposal.new
-      proposal.update(declared_params)
-      present proposal, with: Entities::Proposal::Base
+      if proposal.update(declared_params)
+        present proposal, with: Entities::Proposal::Base
+      else
+        present_validation_error_for proposal
+      end
     end
 
     route_param :id, type: Integer do
@@ -34,7 +38,7 @@ class Endpoints::Proposal < Grape::API
 
     desc 'Update status proposal.'
     params { use :update_status }
-    put  do
+    put do
       proposal = Proposal.find(params[:id])
       proposal.update(declared_params)
     end
