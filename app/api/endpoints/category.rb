@@ -11,9 +11,12 @@ class Endpoints::Category < Grape::API
       requires :name, type: String
     end
     post do
-      category = Category.create(declared_params)
-
-      present category, with: Entities::Category::Base
+      category = Category.new(declared_params)
+      if category.save
+        present category, with: Entities::Category::Base
+      else
+        present_validation_error_for category
+      end
     end
   end
 end

@@ -1,9 +1,26 @@
 class Endpoints::Event < Grape::API
   namespace :events do
     route_param :event_id, type: Integer do
+      desc 'Get event by id'
       get do
         event = Event.find(params[:event_id])
         present event, with: Entities::Event::Base
+      end
+
+      desc 'Update status event'
+      params do
+        requires :status
+      end
+
+      put do
+        authenticate
+        event = current_user.events.find(params[:event_id])
+
+        if event.update(status: declared_params[:status])
+          present event, with: Entities::Event::Base
+        else
+          present_validation_error_for event
+        end
       end
     end
 
@@ -19,7 +36,6 @@ class Endpoints::Event < Grape::API
       requires :category_id, type: Integer
       requires :starts_at, type: DateTime
       optional :location, type: String
-      optional :user_id, type: Integer
       requires :requests_attributes, type: Array do
         requires :description, type: String
       end
@@ -29,26 +45,9 @@ class Endpoints::Event < Grape::API
     end
 
     post do
-      event = Event.new(declared_params)
+      event = current_user.events.build(declared_params)
 
       if event.save
-        present event, with: Entities::Event::Base
-      else
-        present_validation_error_for event
-      end
-    end
-
-    desc 'Update status event.'
-    params do
-      requires :id
-      requires :user_id
-      requires :status
-    end
-
-    put do
-      event = Event.find(params[:id])
-
-      if event.update(declared_params)
         present event, with: Entities::Event::Base
       else
         present_validation_error_for event
