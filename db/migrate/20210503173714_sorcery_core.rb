@@ -4,5 +4,5 @@ class SorceryCore < ActiveRecord::Migration[6.1]
     add_column :users, :salt, :string
 
     remove_column :users, :password, :string
-    end
   end
+end
