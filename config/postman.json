@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0b2a6cd4-350a-49fd-91fd-8be89dd2151d",
+		"_postman_id": "9a9d133d-e2b9-4f9a-a955-28942fc8b3b7",
 		"name": "Api culture",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,13 +15,7 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
@@ -106,10 +100,11 @@
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"console.log(jsonData);",
-									"var auth_key = \"token\";",
-									"postman.setEnvironmentVariable(auth_key, jsonData.token);",
+									"var auth_key = \"API_CULTURE_AUTH_TOKEN\";",
+									"pm.globals.set(auth_key, jsonData.token);",
 									"",
-									"pm.expect(pm.variables.get(auth_key)).to.equal(jsonData.token);",
+									"",
+									"pm.expect(pm.globals.get(auth_key)).to.equal(jsonData.token);",
 									""
 								],
 								"type": "text/javascript"
@@ -121,37 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/auth",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"auth"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Chek",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"email\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -330,6 +295,80 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Find Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Serhii\",\n    \"last_name\": \"Trokhymets\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -337,7 +376,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "",
+				"value": "{{API_CULTURE_AUTH_TOKEN}}",
 				"type": "string"
 			}
 		]
@@ -368,11 +407,7 @@
 			"value": "http://localhost:3000"
 		},
 		{
-			"key": "token",
-			"value": "token"
-		},
-		{
-			"key": "username",
+			"key": "email",
 			"value": "password"
 		},
 		{
