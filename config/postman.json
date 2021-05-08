@@ -15,7 +15,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
@@ -93,12 +99,29 @@
 			"item": [
 				{
 					"name": "Post log in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"console.log(jsonData);",
+									"var auth_key = \"token\";",
+									"postman.setEnvironmentVariable(auth_key, jsonData.token);",
+									"",
+									"pm.expect(pm.variables.get(auth_key)).to.equal(jsonData.token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"email\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,6 +332,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -335,7 +368,7 @@
 			"value": "http://localhost:3000"
 		},
 		{
-			"key": "auth_token",
+			"key": "token",
 			"value": "token"
 		},
 		{
