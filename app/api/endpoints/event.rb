@@ -29,7 +29,6 @@ class Endpoints::Event < Grape::API
       present :records, events, with: Entities::Event::Base
     end
 
-    before &:authenticate
     params do
       requires :title, type: String
       requires :body, type: String
@@ -45,6 +44,7 @@ class Endpoints::Event < Grape::API
     end
 
     post do
+      authenticate
       event = current_user.events.build(declared_params)
 
       if event.save

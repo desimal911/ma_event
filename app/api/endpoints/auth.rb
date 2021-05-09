@@ -19,7 +19,7 @@ class Endpoints::Auth  < Grape::API
       token = JWT.encode payload, ENV.fetch('AUTH_SECRET'), 'HS256'
 
       present :token, token
-      present :user, user
+      present :user, user, with: Entities::User::Base
     end
   end
 end
