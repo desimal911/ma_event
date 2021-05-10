@@ -45,7 +45,9 @@ class Endpoints::Event < Grape::API
 
     post do
       authenticate
-      event = current_user.events.build(declared_params)
+      event_params = declared_params
+      event_params.delete("image") unless event_params["image"].present?
+      event = current_user.events.build(event_params)
 
       if event.save
         present event, with: Entities::Event::Base
