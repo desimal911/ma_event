@@ -1,10 +1,5 @@
 class Endpoints::Users  < Grape::API
   namespace :users do
-    desc 'Find me'
-    get  do
-      authenticate
-      present :user, current_user, with: Entities::User::Base
-    end
 
     params do
       requires :first_name, type: String
@@ -19,6 +14,14 @@ class Endpoints::Users  < Grape::API
       else
         present_validation_error_for(user)
       end
+    end
+  end
+  namespace :me do
+
+  desc 'Find me'
+    get  do
+      authenticate
+      present :user, current_user, with: Entities::User::Base
     end
   end
 end

@@ -25,6 +25,7 @@ gem 'sorcery'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
+gem 'grape-swagger-rails'
 
 # Use activeadmin as admin panel
 gem 'activeadmin'

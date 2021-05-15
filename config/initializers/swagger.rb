@@ -1,0 +1,6 @@
+GrapeSwaggerRails.options.url      = '/api/swagger_doc.json'
+GrapeSwaggerRails.options.app_url  = 'http://52.57.253.240:3000/api/swagger_doc.json'
+GrapeSwaggerRails.options.app_name = 'Chevent'
+GrapeSwaggerRails.options.api_auth = 'token'
+GrapeSwaggerRails.options.api_key_name = 'Authorization'
+GrapeSwaggerRails.options.api_key_type = 'header'
