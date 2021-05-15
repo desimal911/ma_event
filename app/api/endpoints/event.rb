@@ -7,7 +7,9 @@ class Endpoints::Event < Grape::API
         present event, with: Entities::Event::Base
       end
 
-      desc 'Update status event'
+      desc 'Update status event' do
+        headers ::Helpers::Consts::AUTH_HEADER
+      end
       params do
         requires :status
       end
@@ -29,6 +31,9 @@ class Endpoints::Event < Grape::API
       present :records, events, with: Entities::Event::Base
     end
 
+    desc 'Create an event' do
+      headers ::Helpers::Consts::AUTH_HEADER
+    end
     params do
       requires :title, type: String
       requires :body, type: String
