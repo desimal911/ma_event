@@ -25,6 +25,14 @@ class Endpoints::Proposal < Grape::API
       end
     end
 
+    desc 'Get proposal by id'
+    route_param :proposal_id, type: Integer do
+      get do
+        event = Proposal.find(params[:proposal_id])
+        present event, with: Entities::Proposal::Base
+      end
+    end
+
     route_param :proposal_id do
       desc 'Update status proposal.'
       params { use :update_status }
