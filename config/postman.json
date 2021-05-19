@@ -349,13 +349,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users",
+							"raw": "{{host}}/api/me",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"users"
+								"me"
 							]
 						}
 					},
