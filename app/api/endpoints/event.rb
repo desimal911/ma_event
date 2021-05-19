@@ -11,7 +11,7 @@ class Endpoints::Event < Grape::API
         headers ::Helpers::Consts::AUTH_HEADER
       end
       params do
-        requires :status
+        requires :status, type: String
       end
 
       put do
@@ -26,8 +26,14 @@ class Endpoints::Event < Grape::API
       end
     end
 
+    params do
+     optional :user_id, type: Integer
+    end
     get do
       events = Event.all
+      if params['user_id']
+        events = events.where(user_id: params['user_id'])
+      end
       present :records, events, with: Entities::Event::Base
     end
 

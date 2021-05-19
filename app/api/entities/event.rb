@@ -6,8 +6,9 @@ module Entities::Event
     expose :body
     expose :starts_at
     expose :location
-    expose :category_id
     expose :user_id
+    expose :category, with: Entities::Category::Base
+    expose :category_id
     expose :image_url do |entity|
       url_for(entity.image) if entity.image.attached?
     end

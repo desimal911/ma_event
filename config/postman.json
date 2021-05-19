@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dd875388-9775-4e76-8de8-136b3b888345",
+		"_postman_id": "ac38fbe6-6a53-4b35-bb14-c6ed74f2f845",
 		"name": "Api culture",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -47,13 +47,19 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{host}}/api/events",
+							"raw": "{{host}}/api/events?user_id=11",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"events"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "11"
+								}
 							]
 						}
 					},
@@ -152,9 +158,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{production}}/api/auth",
+							"raw": "{{host}}/api/auth",
 							"host": [
-								"{{production}}"
+								"{{host}}"
 							],
 							"path": [
 								"api",
@@ -216,34 +222,6 @@
 				},
 				{
 					"name": "Update status",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"status\": \"declined\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/proposals/2",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"proposals",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get proposal",
 					"request": {
 						"method": "PUT",
 						"header": [],
