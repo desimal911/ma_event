@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5fe609e8-02e5-44ec-ab8e-f5f0f0dad972",
+		"_postman_id": "dd875388-9775-4e76-8de8-136b3b888345",
 		"name": "Api culture",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -152,9 +152,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/auth",
+							"raw": "{{production}}/api/auth",
 							"host": [
-								"{{host}}"
+								"{{production}}"
 							],
 							"path": [
 								"api",
@@ -216,6 +216,34 @@
 				},
 				{
 					"name": "Update status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"declined\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/proposals/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"proposals",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get proposal",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -417,7 +445,7 @@
 		},
 		{
 			"key": "email",
-			"value": "user1@example.com"
+			"value": "user1111@example.com"
 		},
 		{
 			"key": "password",
